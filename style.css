@@ -1,0 +1,418 @@
+:root {
+    --blue: #1a6cff;
+    --red: #b41712;
+    --ink: #0c1a3a;
+    --muted: #5a6f9a;
+    --bg-light: #f8faff;
+    --white: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+em {
+    font-family: serif;
+    font-style: italic;
+    color: var(--red);
+}
+
+.container {
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* SIDE NAV */
+.side-nav {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(12, 26, 58, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+    position: relative;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: var(--red);
+    transform: scale(1.5);
+}
+
+.dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: var(--transition);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.dot:hover::before {
+    opacity: 1;
+    right: 20px;
+}
+
+/* HERO (Split) */
+.hero {
+    height: 100vh;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    padding: 0 5%;
+    gap: 50px;
+}
+
+.hero-left {
+    padding-right: 50px;
+}
+.hero-eyebrow {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+.hero-title {
+    font-size: clamp(40px, 6vw, 90px);
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+.hero-description {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+.hero-meta {
+    border-left: 2px solid var(--red);
+    padding-left: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red);
+    color: white;
+    text-decoration: none;
+    padding: 18px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(26, 108, 255, 0.2);
+}
+
+.hero-visual {
+    position: relative;
+    height: 80vh;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.visual-orb {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 300px;
+    height: 300px;
+    background: var(--red);
+    filter: blur(100px);
+    opacity: 0.2;
+    z-index: -1;
+    animation: float 10s infinite alternate;
+}
+
+@keyframes float {
+    to {
+        transform: translate(50px, 50px);
+    }
+}
+
+/* SECTION HEADER */
+.section-header {
+    margin-bottom: 60px;
+}
+.label {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+.section-header h2 {
+    font-size: 45px;
+}
+
+/* ABOUT (Timeline Ngang) */
+.about-section {
+    padding: 100px 0;
+    background: var(--white);
+}
+.timeline-container {
+    position: relative;
+    padding: 50px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.timeline-line {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e0e8f5;
+    z-index: 1;
+}
+.timeline-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    min-width: 1000px;
+}
+.timeline-item {
+    width: 200px;
+    text-align: center;
+}
+.time-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--white);
+    border: 4px solid var(--red);
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    transition: var(--transition);
+}
+.timeline-item:hover .time-dot {
+    background: var(--red);
+    transform: scale(1.3);
+}
+.time-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.time-content p {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* PROGRAMS (Horizontal Scroll) */
+.programs-section {
+    padding: 100px 0;
+    background: var(--bg-light);
+}
+
+.horizontal-scroll-container {
+    overflow-x: auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+
+    /* Xóa padding dòng cũ đi, thay bằng cơ chế scroll-padding */
+    scroll-padding-left: 5%;
+    scroll-padding-right: 5%;
+
+    scroll-behavior: smooth;
+}
+
+.program-list {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+
+    /* THÊM 2 DÒNG NÀY: Tạo khoảng trống giả ở đầu và cuối danh sách */
+    padding-left: 5%; /* Đẩy ô đầu tiên cách lề trái 5% */
+    padding-right: 5%; /* Đẩy ô cuối cùng cách lề phải 5% */
+}
+
+.program-item {
+    width: 380px;
+    min-width: 380px;
+    flex-shrink: 0;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(26, 108, 255, 0.1);
+    transition: var(--transition);
+    cursor: pointer;
+    scroll-snap-align: start; /* Giữ nguyên để bắt dính khi cuộn */
+    display: flex;
+    flex-direction: column;
+}
+.program-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--red);
+    box-shadow: 0 30px 60px rgba(12, 26, 58, 0.05);
+}
+.p-num {
+    font-family: "DM Mono", monospace;
+    color: var(--red);
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: block;
+}
+.program-item h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.program-item p {
+    color: var(--muted);
+    margin-bottom: 30px;
+
+    /* DÒNG QUAN TRỌNG NHẤT: */
+    flex-grow: 1; /* Thẻ p này sẽ tự động giãn ra để chiếm nốt khoảng trống thừa, đẩy footer xuống đáy */
+}
+.p-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--red);
+
+    /* Đảm bảo không bị co hay đẩy bất thường */
+    margin-top: auto;
+}
+
+/* CONCLUSION (Accordion) */
+.conclusion-section {
+    padding: 100px 0;
+}
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+}
+.accordion-item {
+    border: 1px solid #e0e8f5;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+.accordion-header {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+    transition: var(--transition);
+}
+.accordion-item.active {
+    border-color: var(--red);
+    background: var(--bg-light);
+}
+.accordion-item.active .accordion-header {
+    color: var(--red);
+}
+.accordion-content {
+    max-height: 0;
+    padding: 0 30px;
+    overflow: hidden;
+    transition:
+        max-height 0.5s ease,
+        padding 0.5s ease;
+    color: var(--muted);
+}
+.accordion-item.active .accordion-content {
+    max-height: 200px;
+    padding-bottom: 25px;
+}
+
+.footer {
+    padding: 50px;
+    text-align: center;
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid #e0e8f5;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+    }
+    .hero-right {
+        display: none;
+    }
+    .hero-left {
+        padding-right: 0;
+        text-align: center;
+    }
+    .hero-meta {
+        justify-content: center;
+        align-items: center;
+        border-left: none;
+        border-bottom: 2px solid var(--red);
+        padding-left: 0;
+        padding-bottom: 20px;
+    }
+    .side-nav {
+        display: none;
+    }
+}
